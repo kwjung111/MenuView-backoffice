@@ -27,11 +27,13 @@ dependencies {
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.mysql:mysql-connector-j")
+	implementation("org.mariadb.jdbc:mariadb-java-client:2.1.2")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2")
 	testImplementation("org.springframework.security:spring-security-test")
+	implementation("org.apache.logging.log4j:log4j-api")
+	implementation("org.apache.logging.log4j:log4j-core")
 }
 
 tasks.withType<Test> {
