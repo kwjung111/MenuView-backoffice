@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-    <p> login</p>
+<p> this is test page!</p>
 </body>
 <script src="/js/login.js"></script>
 </html>

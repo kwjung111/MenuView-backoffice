@@ -1,6 +1,6 @@
-package backoffice.backoffice.login;
+package backoffice.backoffice.security;
 
-import backoffice.backoffice.TestController;
+import backoffice.backoffice.cmmn.CmmnController;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 @RequestMapping("/login2")
-public class LoginController {
+public class LoginController extends CmmnController {
 
     public static final Logger logger = LogManager.getLogger(LoginController.class);
-
 
     @RequestMapping("")
     public String Login(HttpServletRequest http){

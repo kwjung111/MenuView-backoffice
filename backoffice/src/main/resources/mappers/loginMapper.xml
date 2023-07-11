@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="backoffice.backoffice.mappers.HomeMapper">
+    <select id="findByusername" parameterType="HashMap" resultType="HashMap">
+        -- 로그인 검증
+        SELECT
+            MBR_ID as username,
+            MBR_PWD as password,
+            MBR_AUTH as role
+        FROM mb_mst
+        WHERE MBR_ID = #{username}
+    </select>
+    <insert id="signUp" parameterType="HashMap">
+        -- 회원가입
+        INSERT INTO mb_mst
+        (MBR_ID,
+         MBR_PWD,
+         MBR_NM,
+         MBR_TEL,
+         MBR_AUTH)
+        VALUES
+            (
+                #{username},
+                #{password},
+                #{name},
+                #{tel},
+                'USER'
+            )
+    </insert>
+</mapper>
