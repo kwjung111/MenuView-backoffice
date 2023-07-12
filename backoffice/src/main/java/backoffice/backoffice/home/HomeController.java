@@ -31,10 +31,18 @@ public class HomeController extends CmmnController {
     @Autowired
     HomeService homeservice;
 
-
-
+    //로그인페이지로 리디렉션
+    @RequestMapping("")
+    public void homeRedirection(HttpServletRequest http,HttpServletResponse res)throws Exception{
+        logger.info("user entered");
+        //로그인 여부 분기처리 필요
+        res.sendRedirect("/login");
+    }
+    
+    //로그인 페이지
     @RequestMapping("/login")
     public String homeView(HttpServletRequest http){
+        //로그인 여부 분기처리 필요
         logger.info("home");
         return "home/home";
     }
