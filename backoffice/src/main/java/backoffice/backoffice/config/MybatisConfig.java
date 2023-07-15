@@ -24,7 +24,7 @@ public class MybatisConfig {
     public DataSource DataSource(){
         return DataSourceBuilder.create()
                 .driverClassName("org.mariadb.jdbc.Driver")
-                .url("jdbc:mysql://43.201.232.98:9999/menudb?characterEncoding=UTF-8&serverTimezone=UTC")
+                .url("jdbc:mariadb://43.201.232.98:9999/menudb?characterEncoding=UTF-8&serverTimezone=UTC")
                 .username("kwjung")
                 .password("123456")
                 .build();

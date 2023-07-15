@@ -10,4 +10,6 @@ public interface HomeMapper {
     public HashMap<String,Object> findByusername(String username);
 
     public int signUp(HashMap<String,String> param);
+
+    public HashMap<String,Object> findId(HashMap<String,String> param);
 }

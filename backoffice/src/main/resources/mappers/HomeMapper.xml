@@ -12,6 +12,14 @@
         FROM mb_mst
         WHERE MBR_ID = #{username}
     </select>
+    <select id="findId" parameterType="HashMap" resultType="HashMap">
+        SELECT
+            MBR_ID as username
+        FROM mb_mst
+        WHERE
+            MBR_EML =#{email}
+            AND MBR_NM = #{name}
+    </select>
     <insert id="signUp" parameterType="HashMap">
         -- 회원가입
         INSERT INTO mb_mst
@@ -19,6 +27,7 @@
          MBR_PWD,
          MBR_NM,
          MBR_TEL,
+         MBR_EML,
          MBR_AUTH)
         VALUES
             (
@@ -26,6 +35,7 @@
                 #{password},
                 #{name},
                 #{tel},
+                #{email},
                 'USER'
             )
     </insert>
