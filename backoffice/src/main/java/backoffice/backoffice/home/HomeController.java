@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//TODO 회원탈퇴 로직 만들어야됨
+//TODO 트랜잭션 적용 필요
 @Controller
 @RequestMapping("/")
 public class HomeController extends CmmnController {
@@ -76,8 +77,8 @@ public class HomeController extends CmmnController {
     public Object logintest(HttpServletRequest request, HttpServletResponse response){
         logger.info("api called");
 
-        Map<String,String> reqParam = getRequestedParam(request);
-        String username = reqParam.get("username");
+        Map<String,Object> reqParam = getRequestedParam(request);
+        String username = reqParam.get("username").toString();
 
         HomeMapper mapper = session.getMapper(HomeMapper.class);
         System.out.println("reqParam : " + reqParam);
@@ -92,7 +93,7 @@ public class HomeController extends CmmnController {
     @RequestMapping(value = "/signUp",method= RequestMethod.POST)
     public String signUp(HttpServletRequest request, HttpServletResponse response ){
 
-        HashMap<String,String> reqParam = (HashMap<String, String>) getRequestedParam(request);
+        HashMap<String,Object> reqParam = (HashMap<String, Object>) getRequestedParam(request);
         int res = homeservice.signUpSvc(reqParam);
         String resMsg = null;
         if(res ==1 ){
@@ -107,7 +108,7 @@ public class HomeController extends CmmnController {
     //ID 찾기
     @ResponseBody
     @RequestMapping(value = "/findId", method=RequestMethod.POST)
-    public HashMap<String,Object> findId(HttpServletRequest request,  HttpServletResponse response, @RequestBody HashMap<String,String> reqParam){
+    public HashMap<String,Object> findId(HttpServletRequest request,  HttpServletResponse response, @RequestBody HashMap<String,Object> reqParam){
         logger.info("findIdProc");
         HashMap<String,Object> res = homeservice.findIdSvc(reqParam);
         return res;

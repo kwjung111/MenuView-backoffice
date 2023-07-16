@@ -7,6 +7,7 @@
 </head>
 <body>
 <button id="menu"> 메뉴 등록</button>
+<button id="info">회원 정보</button>
 <button id="logout" onclick="logout()"> 로그아웃 </button>
 </body>
 <script src="/js/main/main.js"></script>

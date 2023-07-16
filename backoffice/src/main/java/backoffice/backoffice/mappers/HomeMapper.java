@@ -9,7 +9,13 @@ public interface HomeMapper {
 
     public HashMap<String,Object> findByusername(String username);
 
-    public int signUp(HashMap<String,String> param);
+    public HashMap<String,Object> getUserAuth(String username);
 
-    public HashMap<String,Object> findId(HashMap<String,String> param);
+    public int signUp(HashMap<String,Object> param);
+
+    public int signUpAuth(String mbrSeq);
+
+    public HashMap<String,Object> findId(HashMap<String,Object> param);
+
+
 }

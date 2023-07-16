@@ -1,26 +1,21 @@
 package backoffice.backoffice.security;
 
-import backoffice.backoffice.cmmn.CmmnController;
 import backoffice.backoffice.mappers.HomeMapper;
 import backoffice.backoffice.support.SqlSessionSupport;
-import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class LoginPwValidator extends SqlSessionSupport implements UserDetailsService {
@@ -34,27 +29,33 @@ public class LoginPwValidator extends SqlSessionSupport implements UserDetailsSe
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-    //실질적으으로 비밀번호를 비교함
+    //단방향 패스워드 암호화
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //유저가 있는지만 확인함
 
+        UserDetailsVO userDetails = new UserDetailsVO();
+
         HashMap<String,Object> userInfo = mapper.findByusername(username);
+
+        HashMap<String,Object> authInfos = mapper.getUserAuth(username);
+
+        List<String> authorities = new ArrayList<String>();
+
+        authorities.add(authInfos.get("role").toString());
 
         logger.info("username is " + username);
 
         if(userInfo == null) {
             return null;
         }
-            String password = userInfo.get("password").toString();
-            String role     = userInfo.get("role").toString();
-
-            return User.builder()
-                    .username(username)
-                    .password(password)
-                    .roles(role)
-                    .build();
+        userDetails.setUsername(userInfo.get("username").toString());
+        userDetails.setPassword(userInfo.get("password").toString());
+        userDetails.setName(userInfo.get("name").toString());
+        userDetails.setAuthorities(authorities);
+        logger.info("user authorities : " + authorities);
+            return userDetails;
     }
 
 

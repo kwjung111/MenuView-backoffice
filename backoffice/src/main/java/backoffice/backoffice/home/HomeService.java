@@ -11,11 +11,15 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Random;
 
 @Service
+@Transactional
+//TODO 트랜잭션 동작 확인
 public class HomeService {
 
     public static final Logger logger = LogManager.getLogger(HomeService.class);
@@ -29,11 +33,12 @@ public class HomeService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public int signUpSvc(HashMap<String,String> reqParam){
+    public int signUpSvc(HashMap<String,Object> reqParam){
         logger.info("signupSvc called");
+
         HomeMapper mapper = session.getMapper(HomeMapper.class);
 
-        String username = reqParam.get("username");
+        String username = reqParam.get("username").toString();
 
         try {
             HashMap<String, Object> hMap = mapper.findByusername(username);
@@ -43,18 +48,26 @@ public class HomeService {
             return 0;
         }
 
-        String pwd = reqParam.get("password");
+        String pwd = reqParam.get("password").toString();
 
         String encodedPwd = passwordEncoder.encode(pwd);
 
         reqParam.put("password",encodedPwd);
 
-        int result = mapper.signUp(reqParam);
+        mapper.signUp(reqParam); // 인서트 후 파라미터에 키값 리턴
+
+        BigInteger bImemberSeq = (BigInteger) reqParam.get("MBR_SEQ");
+
+        String memberSeq = bImemberSeq.toString();
+
+        logger.info("memberSeq is " + memberSeq);
+
+        int result = mapper.signUpAuth(memberSeq); // auth 테이블에 삽입
 
         return result;
     }
 
-    public HashMap<String,Object> findIdSvc(HashMap<String,String> reqParam){
+    public HashMap<String,Object> findIdSvc(HashMap<String,Object> reqParam){
         logger.info("findIdSvc called");
         HomeMapper mapper = session.getMapper(HomeMapper.class);
         HashMap<String,Object> res = new HashMap<String,Object>();

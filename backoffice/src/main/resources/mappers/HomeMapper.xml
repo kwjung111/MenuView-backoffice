@@ -3,14 +3,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="backoffice.backoffice.mappers.HomeMapper">
-    <select id="findByusername" parameterType="HashMap" resultType="HashMap">
+    <select id="findByusername" parameterType="String" resultType="HashMap">
         -- 로그인 검증
         SELECT
             MBR_ID as username,
             MBR_PWD as password,
-            MBR_AUTH as role
+            MBR_NM as name
         FROM mb_mst
         WHERE MBR_ID = #{username}
+    </select>
+    <select id="getUserInfo" parameterType="String" resultType="HashMap">
+        SELECT
+            AUTH_ROLE as role,
+        FROM
+            mb_auth ma
+                INNER JOIN mb_mst mm
+        ON mm.MBR_SEQ =ma.MBR_SEQ
+        WHERE MBR_ID =#{username}
     </select>
     <select id="findId" parameterType="HashMap" resultType="HashMap">
         SELECT
@@ -20,7 +29,7 @@
             MBR_EML =#{email}
             AND MBR_NM = #{name}
     </select>
-    <insert id="signUp" parameterType="HashMap">
+    <insert id="signUp" useGeneratedKeys="true" keyColumn="MBR_SEQ" keyProperty="MBR_SEQ" parameterType="HashMap">
         -- 회원가입
         INSERT INTO mb_mst
         (MBR_ID,
@@ -36,6 +45,16 @@
                 #{name},
                 #{tel},
                 #{email},
+                'USER'
+            )
+    </insert>
+    <insert id="signUpAuth" parameterType="HashMap">
+        --
+        INSERT INTO mb_auth
+        (MBR_SEQ,
+         AUTH_ROLE)
+        VALUES(
+                #{memberSeq},
                 'USER'
             )
     </insert>

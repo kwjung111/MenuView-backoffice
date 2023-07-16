@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class CmmnController {
 
-    protected static Map<String,String> getRequestedParam(HttpServletRequest request){
-        Map<String,String> hMap = new HashMap<String,String>();
+    protected static Map<String,Object> getRequestedParam(HttpServletRequest request){
+        Map<String,Object> hMap = new HashMap<String,Object>();
         Enumeration<String> paramKeys = request.getParameterNames();
         while (paramKeys.hasMoreElements()) {
             String key = paramKeys.nextElement();
