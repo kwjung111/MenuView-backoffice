@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="backoffice.backoffice.mappers.MainMapper">
+    <select id="getUserInfo" parameterType="HashMap" resultType="HashMap">
+        SELECT
+            MBR_ID as username,
+            MBR_PWD as password,
+            MBR_NM as name
+        FROM mb_mst
+        WHERE MBR_ID = #{username}
+    </select>
+
+</mapper>
