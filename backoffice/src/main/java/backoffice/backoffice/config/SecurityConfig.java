@@ -30,12 +30,12 @@ public class SecurityConfig {
                         .disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/**").permitAll()
-                        .requestMatchers("/login2").hasRole("ADMIN")
+                        .requestMatchers("/main").hasRole("USER")
                         .anyRequest().authenticated()
                 )   //설정은 위에서부터 적용됨
 
                 .formLogin(formLogin ->formLogin
-                        .loginPage("/").permitAll()
+                        .loginPage("/login").permitAll()
                         .loginProcessingUrl("/loginproc")  //credential validation url
                         .failureUrl("/?error=true")
                         .usernameParameter("username")

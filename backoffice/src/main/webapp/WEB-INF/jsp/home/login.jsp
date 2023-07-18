@@ -18,5 +18,5 @@
     <button id="findPwdBtn" onclick="findPwd()" > 비밀번호 찾기</button>
     <button id="testBtn" onclick="test()" > 기능테스트</button>
 </body>
-<script src="/js/home/home.js"></script>
+<script src="/js/home/login.js"></script>
 </html>

@@ -36,10 +36,6 @@ dependencies {
 	implementation("org.apache.logging.log4j:log4j-core:2.20.0")
 	implementation("org.apache.tomcat.embed:tomcat-embed-jasper:10.1.9")
 	implementation("javax.servlet:jstl:1.2")
-	implementation("org.apache.tiles:tiles-core:3.0.8")
-	implementation("org.apache.tiles:tiles-jsp:3.0.8")
-	implementation("org.apache.tiles:tiles-servlet:3.0.8")
-	implementation("org.apache.tiles:tiles-extras:3.0.8")
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 }
 

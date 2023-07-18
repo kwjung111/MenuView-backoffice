@@ -58,4 +58,12 @@
                 'USER'
             )
     </insert>
+    <select id="getUserAuth" parameterType="HashMap" resultType="HashMap">
+    SELECT
+        ma.AUTH_ROLE as role
+        FROM mb_auth ma
+        INNER JOIN mb_mst mm
+        ON mm.MBR_SEQ = ma.MBR_SEQ
+        WHERE mm.MBR_ID = #{username}
+    </select>
 </mapper>

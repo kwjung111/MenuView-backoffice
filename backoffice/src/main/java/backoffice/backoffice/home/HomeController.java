@@ -30,21 +30,12 @@ public class HomeController extends CmmnController {
     @Autowired
     HomeService homeservice;
 
-    //로그인페이지로 리디렉션
-    @RequestMapping("")
-    public void homeRedirection(HttpServletRequest http,HttpServletResponse res)throws Exception{
-        logger.info("user entered");
-        //TODO 로그인 여부 분기처리 필요
-        res.sendRedirect("/login");
-    }
-
 
     //로그인 페이지
     @RequestMapping("/login")
     public String loginView(HttpServletRequest http){
-        //로그인 여부 분기처리 필요
         logger.info("home");
-        return "home/home";
+        return "home/login";
     }
 
     //회원가입 페이지
@@ -64,7 +55,7 @@ public class HomeController extends CmmnController {
     }
 
     //비밀번호 변경
-    //TODO Bcrypt 는 단방향 암호화이기떄문에 찾기 없이 변경 로직 수행
+    //TODO Bcrypt 는 단방향 암호화이기떄문에 찾기 없이 변경 로직 수행 작성
     @RequestMapping("/findPwd")
     public String findPwdView(HttpServletRequest http){
         //로그인 여부 분기처리 필요

@@ -38,7 +38,8 @@ public class LoginPwValidator extends SqlSessionSupport implements UserDetailsSe
         UserDetailsVO userDetails = new UserDetailsVO();
 
         HashMap<String,Object> userInfo = mapper.findByusername(username);
-
+        
+        //TODO 리스트 기반으로 교체
         HashMap<String,Object> authInfos = mapper.getUserAuth(username);
 
         List<String> authorities = new ArrayList<String>();
